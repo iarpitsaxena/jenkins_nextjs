@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { MdArrowOutward } from "react-icons/md";
 import { FaTrashAlt } from "react-icons/fa";
+import EmbedScript from "./EmbedScript";
 
 interface BoardDetailsProps {
     id: string;
@@ -56,6 +57,7 @@ const BoardDetails = ({
                     </div>
                 </div>
             </div>
+            <EmbedScript boardId={id} />
             <div className="mt-8">
                 <button onClick={handleDelete} className="btn btn-ghost text-error-content">Delete <FaTrashAlt /></button>
             </div>
