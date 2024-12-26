@@ -6,9 +6,16 @@ export const DELETE = async (req: Request) => {
         const body = await req.json();
         const { id } = body;
 
+        // First, delete all associated feedbacks
+        await db.feedback.deleteMany({
+            where: {
+                boardId: id
+            }
+        });
+
+        // Then delete the board
         const deletedBoard = await db.board.delete({
-            where: { id },
-            include: { feedbacks: true },
+            where: { id }
         });
 
         if (!deletedBoard) {
