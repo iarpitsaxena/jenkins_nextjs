@@ -1,4 +1,9 @@
 (function () {
+    // Check if current URL contains '/b/' path
+    if (window.location.pathname.includes("/b/")) {
+        return; // Don't create the button on feedback pages
+    }
+
     const button = document.createElement("button");
     button.innerHTML = "💡 Feedback?";
     button.style.position = "fixed";
