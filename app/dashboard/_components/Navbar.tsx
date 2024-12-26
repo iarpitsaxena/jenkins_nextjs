@@ -1,3 +1,4 @@
+import Link from "next/link";
 import ProfileButton from "./ProfileButton";
 
 const Navbar = () => {
@@ -7,7 +8,9 @@ const Navbar = () => {
                 <ProfileButton />
             </div>
             <div className="flex-none">
-                <button className="btn">💡 Feedback?</button>
+                <Link href={"https://feebo.vercel.app/b/676cefd7863d55bccf80d889"} target="_blank">
+                    <button className="btn">💡 Feedback?</button>
+                </Link>
             </div>
         </nav>
     );

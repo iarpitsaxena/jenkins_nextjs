@@ -24,6 +24,7 @@ export default function RootLayout({
         <SessionProvider>
           {children}
         </SessionProvider>
+        <script src="https://feebo.vercel.app/embed.js" data-board-id="676cefd7863d55bccf80d889"></script>
       </body>
     </html>
   );
