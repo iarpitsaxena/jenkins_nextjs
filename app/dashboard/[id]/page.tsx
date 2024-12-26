@@ -52,7 +52,7 @@ const BoardPage = () => {
     }
 
     return (
-        <div className="w-9/12 mx-auto md:h-[88vh] py-8">
+        <div className="w-9/12 mx-auto md:h-[88vh] py-6">
             <Link href={"/dashboard"}>
                 <button className="btn bg-white">
                     <RiArrowGoBackLine /> Back

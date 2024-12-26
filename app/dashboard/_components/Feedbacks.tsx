@@ -50,7 +50,7 @@ const Feedbacks = ({ feedbacks: initialFeedbacks }: FeedbacksProps) => {
                     No feedbacks yet. Share your board to get some!
                 </div>
             ) : (
-                <div className="space-y-4">
+                <div className="space-y-4 max-h-[60vh] overflow-scroll">
                     {feedbacks.map((feedback) => (
                         <div key={feedback.id} className="card bg-base-100 shadow-xl">
                             <div className="card-body">

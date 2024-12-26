@@ -3,18 +3,21 @@
 import Link from "next/link";
 import { useState } from "react";
 import { useParams } from "next/navigation";
+import { LuLoader } from "react-icons/lu";
 
 interface FeedbackFormProps {
-    onSubmit?: () => void;
+    onSubmit?: (feedback: any) => void;
 }
 
 const FeedbackForm = ({ onSubmit }: FeedbackFormProps) => {
     const params = useParams();
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
+    const [isLoading, setIsLoading] = useState(false);
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
+        setIsLoading(true);
         try {
             const response = await fetch("/api/feedback/create", {
                 method: "POST",
@@ -32,12 +35,15 @@ const FeedbackForm = ({ onSubmit }: FeedbackFormProps) => {
                 throw new Error("Failed to create feedback");
             }
 
-            // const data = await response.json();
+            const newFeedback = await response.json();
+
             setTitle("");
             setDescription("");
-            onSubmit?.();
+            onSubmit?.(newFeedback);
         } catch (err) {
             console.error(err);
+        } finally {
+            setIsLoading(false);
         }
     }
 
@@ -64,7 +70,20 @@ const FeedbackForm = ({ onSubmit }: FeedbackFormProps) => {
                             </label>
                         </div>
                         <div className="card-actions mt-4">
-                            <button type="submit" className="btn btn-warning w-full">Create Post</button>
+                            <button
+                                type="submit"
+                                className="btn btn-warning w-full"
+                                disabled={isLoading}
+                            >
+                                {isLoading ? (
+                                    <>
+                                        <LuLoader className="animate-spin size-4" />
+                                        Creating...
+                                    </>
+                                ) : (
+                                    "Create Post"
+                                )}
+                            </button>
                         </div>
                     </form>
                 </div>

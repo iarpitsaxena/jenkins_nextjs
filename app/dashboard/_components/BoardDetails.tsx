@@ -48,9 +48,9 @@ const BoardDetails = ({
             <div className="mt-6">
                 <p className="text-sm mb-1 font-bold">Public link</p>
                 <div className="relative px-4 py-2.5 rounded-box bg-base-100 select-all md:w-96 w-80">
-                    <div className="truncate">http://localhost:3000/b/{id}</div>
+                    <div className="truncate">https://feebo.vercel.app/b/{id}</div>
                     <div className="absolute flex items-center gap-2 right-2 top-1/2 -translate-y-1/2">
-                        <Link href={`http://localhost:3000/b/${id}`} target="_blank" className="btn btn-neutral btn-sm btn-square" data-tooltip-id="tooltip" data-tooltip-content="Go to board">
+                        <Link href={`https://feebo.vercel.app/b/${id}`} target="_blank" className="btn btn-neutral btn-sm btn-square" data-tooltip-id="tooltip" data-tooltip-content="Go to board">
                             <MdArrowOutward />
                         </Link>
                     </div>
