@@ -14,12 +14,19 @@ interface FeedbacksProps {
     feedbacks: Feedback[];
 }
 
-const Feedbacks = ({ feedbacks }: FeedbacksProps) => {
+const Feedbacks = ({ feedbacks: initialFeedbacks }: FeedbacksProps) => {
+    const [feedbacks, setFeedbacks] = useState<Feedback[]>(initialFeedbacks);
     const [votedFeedbacks, setVotedFeedbacks] = useState<Set<string>>(new Set());
 
     const handleVote = async (id: string) => {
         const isVoted = votedFeedbacks.has(id);
         const voteValue = isVoted ? -1 : 1;
+
+        // Find the feedback and check if removing vote would make it negative
+        const feedback = feedbacks.find(f => f.id === id);
+        if (feedback && isVoted && feedback.votes <= 0) {
+            return; // Prevent voting if it would make votes negative
+        }
 
         try {
             const response = await fetch("/api/feedback/vote", {
@@ -36,6 +43,15 @@ const Feedbacks = ({ feedbacks }: FeedbacksProps) => {
             if (!response.ok) {
                 throw new Error("Failed to update vote");
             }
+
+            const updatedFeedback = await response.json();
+
+            // Update feedbacks state
+            setFeedbacks(prevFeedbacks =>
+                prevFeedbacks.map(feedback =>
+                    feedback.id === id ? { ...feedback, votes: updatedFeedback.votes } : feedback
+                )
+            );
 
             // Toggle voted state
             const newVotedFeedbacks = new Set(votedFeedbacks);
