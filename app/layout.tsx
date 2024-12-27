@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { SessionProvider } from "next-auth/react";
 import { Kanit } from "next/font/google";
 import "./globals.css";
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 const font = Kanit({ weight: ["400", "500", "700", "900"], subsets: ["latin"] });
 
@@ -24,6 +25,7 @@ export default function RootLayout({
         <SessionProvider>
           {children}
         </SessionProvider>
+        <SpeedInsights />
         <script src="https://feebo.vercel.app/embed.js" data-board-id="676cefd7863d55bccf80d889"></script>
       </body>
     </html>
