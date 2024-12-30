@@ -1,7 +1,10 @@
 (function () {
-    // Check if current URL contains '/b/' path
-    if (window.location.pathname.includes("/b/")) {
-        return; // Don't create the button on feedback pages
+    // Check if current URL contains '/b/' or '/dashboard/' path
+    if (
+        window.location.pathname.includes("/b/") ||
+        window.location.pathname.includes("/dashboard/")
+    ) {
+        return; // Don't create the button on feedback pages or dashboard
     }
 
     const script = document.currentScript;
