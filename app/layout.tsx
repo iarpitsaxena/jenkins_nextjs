@@ -26,7 +26,7 @@ export default function RootLayout({
           {children}
         </SessionProvider>
         <SpeedInsights />
-        <script src="https://feebo.vercel.app/embed.js" data-board-id="676cefd7863d55bccf80d889"></script>
+        <script src="https://feebo.vercel.app/embed.js" data-board-id="676cefd7863d55bccf80d889" data-btn-bg="#333333" data-btn-color="#ffffff" data-btn-radius="50" data-btn-text="💡 Feedback?"></script>
       </body>
     </html>
   );
