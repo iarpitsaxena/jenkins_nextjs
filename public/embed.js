@@ -4,15 +4,23 @@
         return; // Don't create the button on feedback pages
     }
 
+    const script = document.currentScript;
     const button = document.createElement("button");
-    button.innerHTML = "💡 Feedback?";
+
+    // Get customization options from data attributes
+    const buttonText = script.getAttribute("data-btn-text") || "💡 Feedback?";
+    const backgroundColor = script.getAttribute("data-btn-bg") || "#222";
+    const textColor = script.getAttribute("data-btn-color") || "#fff";
+    const borderRadius = script.getAttribute("data-btn-radius") || "10";
+
+    button.innerHTML = buttonText;
     button.style.position = "fixed";
     button.style.bottom = "20px";
     button.style.right = "20px";
     button.style.padding = "12px 24px";
-    button.style.borderRadius = "10px";
-    button.style.backgroundColor = "#222";
-    button.style.color = "#fff";
+    button.style.borderRadius = `${borderRadius}px`;
+    button.style.backgroundColor = backgroundColor;
+    button.style.color = textColor;
     button.style.border = "none";
     button.style.cursor = "pointer";
     button.style.fontWeight = "bold";
@@ -31,7 +39,7 @@
         button.style.transform = "scale(1)";
     };
 
-    const boardId = document.currentScript.getAttribute("data-board-id");
+    const boardId = script.getAttribute("data-board-id");
     button.onclick = function () {
         window.open(`https://feebo.vercel.app/b/${boardId}`, "_blank");
     };
