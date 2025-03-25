@@ -7,7 +7,7 @@ pipeline {
     stages {
         stage('Clone Repository') {
             steps {
-                git credentialsId: 'github-credentials', url: 'https://github.com/iarpitsaxena/jenkins_nextjs.git'
+                git branch: 'main', credentialsId: 'github-credentials', url: 'https://github.com/iarpitsaxena/jenkins_nextjs.git'
             }
         }
         stage('Build Docker Image') {
@@ -26,7 +26,7 @@ pipeline {
             steps {
                 sshagent(['aws-ec2-ssh-key']) {
                     sh """
-                    ssh -o StrictHostKeyChecking=no ec2-user@3.91.218.156 '
+                    ssh -i ~/.ssh/aws-key.pem -o StrictHostKeyChecking=no ec2-user@3.91.218.156 '
                         docker pull $DOCKER_IMAGE &&
                         docker stop mern-container || true &&
                         docker rm mern-container || true &&
