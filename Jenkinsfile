@@ -2,7 +2,7 @@ pipeline {
     agent any
     environment {
         DOCKER_IMAGE = 'iarpitsaxena/jenkins_nextjs:latest'
-        NEXTAUTH_URL = "http://54.82.149.137"  // ✅ Update with actual EC2 IP
+        NEXTAUTH_URL = "http://3.91.218.156"  // ✅ Update with actual EC2 IP
     }
     stages {
         stage('Clone Repository') {
@@ -26,11 +26,11 @@ pipeline {
             steps {
                 sshagent(['aws-ec2-ssh-key']) {
                     sh """
-                    ssh -o StrictHostKeyChecking=no ec2-user@54.82.149.137 '
+                    ssh -o StrictHostKeyChecking=no ec2-user@3.91.218.156 '
                         docker pull $DOCKER_IMAGE &&
                         docker stop mern-container || true &&
                         docker rm mern-container || true &&
-                        docker run -d -p 80:3000 --name mern-container -e NEXTAUTH_URL="http://54.82.149.137" $DOCKER_IMAGE
+                        docker run -d -p 80:3000 --name mern-container -e NEXTAUTH_URL="http://3.91.218.156" $DOCKER_IMAGE
                     '
                     """
                 }
